@@ -228,11 +228,7 @@ export default function HomeScreen() {
           />
         </TouchableOpacity>
         <TouchableOpacity style={styles.soundBtn} onPress={handleCallNumber}>
-          <IconSymbol
-            name="paperplane.fill"
-            size={48}
-            color={Colors.light.tint}
-          />
+          <ThemedText style={styles.soundBtnText}>Kêu</ThemedText>
         </TouchableOpacity>
         <TouchableOpacity style={styles.resetBtn} onPress={handleReset}>
           <IconSymbol
@@ -293,6 +289,12 @@ const styles = StyleSheet.create({
     marginLeft: 48,
     alignItems: "center",
     justifyContent: "center",
+    minWidth: 120,
+  },
+  soundBtnText: {
+    color: "#2f3542",
+    fontWeight: "bold",
+    fontSize: 24,
   },
   resetBtn: {
     backgroundColor: Colors.light.background,
