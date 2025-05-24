@@ -11,7 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ff4757"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -20,15 +22,16 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ff4757"
       },
-      "package": "com.yourusername.raoloto"
+      "package": "com.dungdomino2004.raoloto"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "your-project-id"
+        "projectId": "7ed35b8a-fbe8-42c8-b832-ffb97e7d0f60"
       }
-    }
+    },
+    "owner": "dungdomino2004"
   }
 }
