@@ -12,9 +12,9 @@
 
 ## Tải ứng dụng
 
-Bạn có thể tải file APK mới nhất từ [Releases](https://github.com/yourusername/rao-loto/releases)
+Bạn có thể tải file APK mới nhất từ [Releases](https://github.com/dungdomino2004/rao-loto/releases)
 
-## Cài đặt
+### Cài đặt
 
 1. Tải file APK từ phần Releases
 2. Cho phép cài đặt ứng dụng từ nguồn không xác định trong cài đặt điện thoại
@@ -32,7 +32,7 @@ Bạn có thể tải file APK mới nhất từ [Releases](https://github.com/y
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/rao-loto.git
+git clone https://github.com/dungdomino2004/rao-loto.git
 
 # Di chuyển vào thư mục dự án
 cd rao-loto
