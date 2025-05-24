@@ -12,7 +12,7 @@
 
 ## Tải ứng dụng
 
-Bạn có thể tải file APK mới nhất từ [Releases](https://github.com/dungdomino2004/rao-loto/releases)
+Bạn có thể tải file APK mới nhất từ [Releases](https://github.com/tridung778/rao-loto/releases)
 
 ### Cài đặt
 
