@@ -73,53 +73,56 @@ const sounds: Record<number, any> = {
   51: require("@/assets/sounds/list/51.mp3"),
   52: require("@/assets/sounds/list/52.mp3"),
   53: require("@/assets/sounds/list/53.mp3"),
-  // 54: require("@/assets/sounds/list/54.mp3"),
-  // 55: require("@/assets/sounds/list/55.mp3"),
-  // 56: require("@/assets/sounds/list/56.mp3"),
-  // 57: require("@/assets/sounds/list/57.mp3"),
-  // 58: require("@/assets/sounds/list/58.mp3"),
-  // 59: require("@/assets/sounds/list/59.mp3"),
-  // 60: require("@/assets/sounds/list/60.mp3"),
-  // 61: require("@/assets/sounds/list/61.mp3"),
-  // 62: require("@/assets/sounds/list/62.mp3"),
-  // 63: require("@/assets/sounds/list/63.mp3"),
-  // 64: require("@/assets/sounds/list/64.mp3"),
-  // 65: require("@/assets/sounds/list/65.mp3"),
-  // 66: require("@/assets/sounds/list/66.mp3"),
-  // 67: require("@/assets/sounds/list/67.mp3"),
-  // 68: require("@/assets/sounds/list/68.mp3"),
-  // 69: require("@/assets/sounds/list/69.mp3"),
-  // 70: require("@/assets/sounds/list/70.mp3"),
-  // 71: require("@/assets/sounds/list/71.mp3"),
-  // 72: require("@/assets/sounds/list/72.mp3"),
-  // 73: require("@/assets/sounds/list/73.mp3"),
-  // 74: require("@/assets/sounds/list/74.mp3"),
-  // 75: require("@/assets/sounds/list/75.mp3"),
-  // 76: require("@/assets/sounds/list/76.mp3"),
-  // 77: require("@/assets/sounds/list/77.mp3"),
-  // 78: require("@/assets/sounds/list/78.mp3"),
-  // 79: require("@/assets/sounds/list/79.mp3"),
-  // 80: require("@/assets/sounds/list/80.mp3"),
-  // 81: require("@/assets/sounds/list/81.mp3"),
-  // 82: require("@/assets/sounds/list/82.mp3"),
-  // 83: require("@/assets/sounds/list/83.mp3"),
-  // 84: require("@/assets/sounds/list/84.mp3"),
-  // 85: require("@/assets/sounds/list/85.mp3"),
-  // 86: require("@/assets/sounds/list/86.mp3"),
-  // 87: require("@/assets/sounds/list/87.mp3"),
-  // 88: require("@/assets/sounds/list/88.mp3"),
-  // 89: require("@/assets/sounds/list/89.mp3"),
-  // 90: require("@/assets/sounds/list/90.mp3"),
+  54: require("@/assets/sounds/list/54.mp3"),
+  55: require("@/assets/sounds/list/55.mp3"),
+  56: require("@/assets/sounds/list/56.mp3"),
+  57: require("@/assets/sounds/list/57.mp3"),
+  58: require("@/assets/sounds/list/58.mp3"),
+  59: require("@/assets/sounds/list/59.mp3"),
+  60: require("@/assets/sounds/list/60.mp3"),
+  61: require("@/assets/sounds/list/61.mp3"),
+  62: require("@/assets/sounds/list/62.mp3"),
+  63: require("@/assets/sounds/list/63.mp3"),
+  64: require("@/assets/sounds/list/64.mp3"),
+  65: require("@/assets/sounds/list/65.mp3"),
+  66: require("@/assets/sounds/list/66.mp3"),
+  67: require("@/assets/sounds/list/67.mp3"),
+  68: require("@/assets/sounds/list/68.mp3"),
+  69: require("@/assets/sounds/list/69.mp3"),
+  70: require("@/assets/sounds/list/70.mp3"),
+  71: require("@/assets/sounds/list/71.mp3"),
+  72: require("@/assets/sounds/list/72.mp3"),
+  73: require("@/assets/sounds/list/73.mp3"),
+  74: require("@/assets/sounds/list/74.mp3"),
+  75: require("@/assets/sounds/list/75.mp3"),
+  76: require("@/assets/sounds/list/76.mp3"),
+  77: require("@/assets/sounds/list/77.mp3"),
+  78: require("@/assets/sounds/list/78.mp3"),
+  79: require("@/assets/sounds/list/79.mp3"),
+  80: require("@/assets/sounds/list/80.mp3"),
+  81: require("@/assets/sounds/list/81.mp3"),
+  82: require("@/assets/sounds/list/82.mp3"),
+  83: require("@/assets/sounds/list/83.mp3"),
+  84: require("@/assets/sounds/list/84.mp3"),
+  85: require("@/assets/sounds/list/85.mp3"),
+  86: require("@/assets/sounds/list/86.mp3"),
+  87: require("@/assets/sounds/list/87.mp3"),
+  88: require("@/assets/sounds/list/88.mp3"),
+  89: require("@/assets/sounds/list/89.mp3"),
+  90: require("@/assets/sounds/list/90.mp3"),
 };
 
 export default function HomeScreen() {
   const [sound, setSound] = useState<Audio.Sound | undefined>(undefined);
   const [selected, setSelected] = useState<number[]>([]);
   const [lastCalled, setLastCalled] = useState<number | null>(null);
+  const [isMuted, setIsMuted] = useState(false);
   const scaleAnim = new Animated.Value(1);
   const fadeAnim = new Animated.Value(1);
 
   async function playSound(number: number) {
+    if (isMuted) return;
+
     if (sound) {
       await sound.unloadAsync();
     }
@@ -143,6 +146,10 @@ export default function HomeScreen() {
   const handleReset = () => {
     setSelected([]);
     setLastCalled(null);
+  };
+
+  const toggleMute = () => {
+    setIsMuted(!isMuted);
   };
 
   const handleCallNumber = () => {
@@ -196,6 +203,14 @@ export default function HomeScreen() {
 
   return (
     <ThemedView style={styles.container}>
+      {lastCalled !== null && (
+        <Animated.View
+          style={[styles.lastCalled, { transform: [{ scale: scaleAnim }] }]}
+        >
+          <ThemedText style={styles.lastCalledText}>Số vừa kêu</ThemedText>
+          <ThemedText style={styles.lastCalledNumber}>{lastCalled}</ThemedText>
+        </Animated.View>
+      )}
       <FlatList
         data={lotoNumbers}
         renderItem={renderLoto}
@@ -205,6 +220,13 @@ export default function HomeScreen() {
         contentContainerStyle={styles.lotoGrid}
       />
       <View style={styles.bottomRow}>
+        <TouchableOpacity style={styles.resetBtn} onPress={toggleMute}>
+          <IconSymbol
+            name={isMuted ? "speaker.slash.fill" : "speaker.wave.2.fill"}
+            size={32}
+            color={Colors.light.icon}
+          />
+        </TouchableOpacity>
         <TouchableOpacity style={styles.soundBtn} onPress={handleCallNumber}>
           <IconSymbol
             name="paperplane.fill"
@@ -214,21 +236,12 @@ export default function HomeScreen() {
         </TouchableOpacity>
         <TouchableOpacity style={styles.resetBtn} onPress={handleReset}>
           <IconSymbol
-            name="chevron.left.forwardslash.chevron.right"
+            name="arrow.counterclockwise"
             size={32}
             color={Colors.light.icon}
           />
         </TouchableOpacity>
       </View>
-      {lastCalled !== null && (
-        <Animated.View
-          style={[styles.lastCalled, { transform: [{ scale: scaleAnim }] }]}
-        >
-          <ThemedText style={styles.lastCalledText}>
-            Số vừa kêu: {lastCalled}
-          </ThemedText>
-        </Animated.View>
-      )}
     </ThemedView>
   );
 }
@@ -241,7 +254,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 32,
     alignItems: "center",
-    backgroundColor: Colors.light.background,
+    backgroundColor: "#ff4757",
   },
   lotoGrid: {
     alignItems: "center",
@@ -261,7 +274,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.light.tint,
   },
   lotoText: {
-    color: Colors.light.background,
+    color: "#2f3542",
     fontWeight: "bold",
     fontSize: 16,
   },
@@ -276,7 +289,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.light.tint,
     borderRadius: 32,
     padding: 16,
-    marginRight: 16,
+    marginRight: 48,
+    marginLeft: 48,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -291,13 +305,20 @@ const styles = StyleSheet.create({
   },
   lastCalled: {
     marginTop: 16,
-    padding: 8,
+    padding: 16,
     backgroundColor: Colors.light.tint,
     borderRadius: 8,
+    marginBottom: 32,
   },
   lastCalledText: {
-    color: Colors.light.background,
+    color: "#2f3542",
     fontWeight: "bold",
     fontSize: 18,
+  },
+  lastCalledNumber: {
+    color: "#2f3542",
+    fontWeight: "bold",
+    fontSize: 32,
+    textAlign: "center",
   },
 });
